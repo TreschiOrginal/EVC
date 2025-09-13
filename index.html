@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación EVC - Dr. Brandon Arguelles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .slide-content {
+            width: 90%;
+            max-width: 1200px;
+            height: 85%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bibliography {
+            max-width: 50%;
+            text-align: right;
+            opacity: 0.7;
+        }
+        .nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        #prevBtn { left: 20px; }
+        #nextBtn { right: 20px; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <div id="presentation-container">
+        <!-- Slide 1: Portada -->
+        <div class="slide active bg-gradient-to-br from-blue-900 via-gray-900 to-slate-900">
+            <div class="slide-content text-center">
+                <div class="flex justify-center mb-6">
+                    <img src="https://placehold.co/150x150/ffffff/1f2937?text=ISSSTE" alt="Logo ISSSTE" class="bg-white p-2 rounded-full">
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 text-blue-300">Evento Vascular Cerebral</h1>
+                <p class="text-3xl md:text-4xl font-light text-gray-300">Abordaje Integral en la Práctica Clínica</p>
+                <div class="mt-12 text-xl text-gray-400">
+                    <p>Presenta: Dr. Brandon Arguelles</p>
+                    <p class="text-lg">Médico Pasante del Servicio Social</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="text-sm">ISSSTE</div>
+                <div class="text-sm">17 de Septiembre del 2025</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Definiciones -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">1. Definiciones Clave: ¿Qué es un EVC?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p><strong class="text-white">EVC (GPC Mexicana):</strong> Trastorno donde un área del encéfalo se afecta por isquemia o hemorragia, debido a un proceso patológico en vasos sanguíneos cerebrales.</p>
+                        <p><strong class="text-white">AIT vs. EVC Isquémico:</strong> La distinción clave ya no es el tiempo (<24h), sino la evidencia de infarto en neuroimagen. Un AIT es un episodio de disfunción neurológica <strong class="text-yellow-300">sin infarto agudo en DWI-RM</strong>.</p>
+                        <p><strong class="text-white">Penumbra Isquémica:</strong> Tejido cerebral hipoperfundido, funcionalmente silente pero metabólicamente viable. Es el <strong class="text-green-300">objetivo principal de las terapias de reperfusión</strong>.</p>
+                    </div>
+                    <div class="flex justify-center">
+                         <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Imagen+del+Cerebro+con+Penumbra]" alt="Penumbra Isquémica" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Guía de Práctica Clínica CENETEC. (2017). Diagnóstico y Tratamiento Inicial del Evento Vascular Cerebral Isquémico en el Adulto en el Primer y Segundo Nivel de Atención.</div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Clasificación -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-center text-blue-300">2. Clasificación General del EVC</h2>
+                <div class="flex flex-col md:flex-row justify-around items-center h-full">
+                    <div class="text-center p-6 border border-blue-400 rounded-lg w-full md:w-2/5">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-2">Isquémico (~87%)</h3>
+                        <p class="text-lg text-gray-300">Oclusión de un vaso sanguíneo cerebral (trombo o émbolo). Se interrumpe el flujo de O₂ y glucosa, desencadenando la "cascada isquémica" y muerte neuronal.</p>
+                    </div>
+                     <div class="flex justify-center my-4 md:my-0">
+                        <img src="https://placehold.co/400x400/1f2937/e2e8f0?text=[Diagrama+Isquémico+vs+Hemorrágico]" alt="Clasificación EVC" class="rounded-lg">
+                    </div>
+                    <div class="text-center p-6 border border-red-400 rounded-lg w-full md:w-2/5">
+                        <h3 class="text-3xl font-bold text-red-400 mb-2">Hemorrágico (~13%)</h3>
+                        <p class="text-lg text-gray-300">Ruptura de un vaso sanguíneo con extravasación de sangre. Causa daño por compresión (efecto de masa) y toxicidad de los componentes sanguíneos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Saini, V., Guada, L., & Yavagal, D. R. (2021). Global Epidemiology of Stroke and Access to Care. Neurology, 97(20 Supplement 2), S6-S16.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Subtipos Isquémicos -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">3. EVC Isquémico: Clasificación Etiológica TOAST</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <ul class="text-lg space-y-3 text-gray-300 list-disc list-inside">
+                        <li><strong class="text-white">Aterotrombótico de gran vaso:</strong> Estenosis >50% por placa de ateroma en arterias de gran calibre (ej. carótida).</li>
+                        <li><strong class="text-white">Cardioembólico:</strong> Émbolo desde el corazón. Causa #1: <strong class="text-yellow-300">Fibrilación Auricular</strong>.</li>
+                        <li><strong class="text-white">Oclusión de pequeño vaso (Lacunar):</strong> Infartos <1.5 cm en áreas profundas, asociados a HTA y Diabetes.</li>
+                        <li><strong class="text-white">Otras causas determinadas:</strong> Disecciones arteriales, vasculitis, estados de hipercoagulabilidad.</li>
+                        <li><strong class="text-white">Causa indeterminada (Criptogénico):</strong> No se identifica una causa clara tras estudio completo.</li>
+                    </ul>
+                     <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Ilustración+Ateroma+y+Cardioembolismo]" alt="Causas EVC Isquémico" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+             <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Adams, H. P., et al. (1993). Classification of subtype of acute ischemic stroke. Definitions for use in a multicenter clinical trial. TOAST. Stroke, 24(1), 35-41.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Subtipos Hemorrágicos -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-red-300">4. EVC Hemorrágico: Subtipos por Localización</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-white">Hemorragia Intraparenquimatosa (HIP)</h3>
+                            <p class="text-lg text-gray-300">Sangrado dentro del tejido cerebral. Causas principales: <strong class="text-yellow-300">Hipertensión arterial crónica</strong> (hemorragias profundas) y Angiopatía amiloide (hemorragias lobares en ancianos).</p>
+                        </div>
+                        <div>
+                             <h3 class="text-2xl font-semibold text-white">Hemorragia Subaracnoidea (HSA)</h3>
+                            <p class="text-lg text-gray-300">Sangre en el espacio subaracnoideo. Causa #1 (no traumática): <strong class="text-yellow-300">Ruptura de un aneurisma sacular</strong>.</p>
+                        </div>
+                        <div class="p-3 bg-red-900/50 border border-red-500 rounded-md">
+                           <p class="text-white"><strong class="font-bold">Nota importante:</strong> No existe una GPC CENETEC reciente y específica para el manejo del EVC hemorrágico en México.</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[TC+con+HIP+y+HSA]" alt="Tipos EVC Hemorrágico" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Hemphill, J. C., et al. (2022). Guidelines for the Management of Spontaneous Intracerebral Hemorrhage. Stroke, 53(7).</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Epidemiología Global -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">5. Epidemiología: Una Pandemia Global</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p><strong class="text-white">Cifras globales (2019):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong class="text-blue-300">12.2 millones</strong> de nuevos casos de EVC.</li>
+                            <li><strong class="text-blue-300">101 millones</strong> de personas viviendo con secuelas.</li>
+                            <li><strong class="text-blue-300">6.55 millones</strong> de muertes.</li>
+                        </ul>
+                        <p><strong class="text-white">Estudio INTERSTROKE:</strong> 5 factores de riesgo modificables explican >80% del riesgo de EVC:</p>
+                        <p class="text-center font-semibold text-yellow-300">Hipertensión, Tabaquismo, Obesidad abdominal, Dieta no saludable e Inactividad física.</p>
+                        <p class="text-red-400 font-bold text-xl text-center">La HTA es el factor de riesgo MÁS importante.</p>
+                    </div>
+                    <div class="flex justify-center">
+                         <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Mapa+mundial+de+carga+de+EVC]" alt="Epidemiología Global" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Feigin, V. L., et al. (2021). Global, regional, and national burden of stroke and its risk factors, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet Neurology, 20(10), 795-820.</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Epidemiología en México -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">6. El Panorama del EVC en México</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                         <p>Es la <strong class="text-white">1ª causa de discapacidad</strong> adquirida en adultos y la <strong class="text-white">2ª causa de demencia</strong>.</p>
+                        <p>Se estiman alrededor de <strong class="text-yellow-300">170,000 nuevos casos</strong> cada año.</p>
+                        <div class="p-4 bg-gray-800 rounded-lg">
+                            <p class="font-bold text-white mb-2">Mortalidad (Datos INEGI 2023):</p>
+                            <ul class="list-disc list-inside ml-4">
+                                <li><strong class="text-red-400">6ª</strong> causa de muerte nacional (34,428 defunciones).</li>
+                                <li><strong class="text-red-400">4ª</strong> causa de muerte en mujeres.</li>
+                                <li><strong class="text-red-400">8ª</strong> causa de muerte en hombres.</li>
+                            </ul>
+                        </div>
+                         <p>Alta prevalencia de factores de riesgo: tabaquismo, alcoholismo, sedentarismo, obesidad y estrés.</p>
+                    </div>
+                    <div class="flex justify-center">
+                         <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Gráfica+de+mortalidad+en+México]" alt="Epidemiología México" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">INEGI. (2024). Estadísticas de Defunciones Registradas 2023 (Resultados definitivos). Comunicado de prensa núm. 460/24.</div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Diagnóstico - Tiempo es Cerebro -->
+        <div class="slide">
+            <div class="slide-content text-center">
+                 <h2 class="text-5xl font-bold mb-6 text-yellow-300">7. Diagnóstico Agudo: "Tiempo es Cerebro"</h2>
+                <div class="flex justify-center mb-8">
+                     <img src="https://placehold.co/200x200/1f2937/e2e8f0?text=[Icono+de+Reloj+y+Cerebro]" alt="Tiempo es Cerebro" class="rounded-full">
+                </div>
+                <p class="text-2xl text-gray-300 max-w-4xl mx-auto mb-6">Cada minuto de isquemia no tratada resulta en la pérdida de millones de neuronas. El objetivo es completar la evaluación y tomar una decisión terapéutica en los primeros <strong class="text-white">60 minutos ("La Hora Dorada")</strong>.</p>
+                <p class="text-2xl font-semibold">El diagnóstico inicial es <strong class="text-yellow-300">CLÍNICO</strong>: déficit neurológico de inicio <strong class="text-red-400">SÚBITO</strong> y focal.</p>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Powers, W. J., et al. (2019). Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update. Stroke, 50(12).</div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Escalas Clínicas -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-8 text-center text-blue-300">8. Escalas Clínicas de Urgencia</h2>
+                <div class="flex flex-col md:flex-row justify-around items-start">
+                    <div class="w-full md:w-2/5 p-4">
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-white">Tamizaje Rápido</h3>
+                        <div class="flex justify-center">
+                            <img src="https://placehold.co/400x250/1f2937/e2e8f0?text=[Gráfico+de+escala+FAST]" alt="Escala FAST" class="rounded-lg mb-4">
+                        </div>
+                        <p class="text-lg text-center text-gray-300">La GPC Mexicana 2022 recomienda <strong class="text-yellow-300">FAST</strong> o <strong class="text-yellow-300">Cincinnati (CPSS)</strong> para el personal de primer contacto. Una anormalidad en 1 de los 3 ítems = alta probabilidad de EVC.</p>
+                    </div>
+                    <div class="w-full md:w-2/5 p-4 border-l-0 md:border-l-2 border-blue-500">
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-white">Cuantificación de Severidad</h3>
+                        <div class="flex justify-center">
+                            <img src="https://placehold.co/400x250/1f2937/e2e8f0?text=[Logo+NIHSS]" alt="Escala NIHSS" class="rounded-lg mb-4">
+                        </div>
+                        <p class="text-lg text-center text-gray-300"><strong class="text-white">NIHSS (National Institutes of Health Stroke Scale)</strong> es el estándar de oro. Cuantifica el déficit, determina elegibilidad para reperfusión y tiene valor pronóstico.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Guía de Práctica Clínica CENETEC. (2022). Diagnóstico y Tratamiento del Evento Vascular Cerebral Isquémico Agudo en Adultos en el Segundo y Tercer Nivel de Atención.</div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Neuroimagen TC -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">9. Neuroimagen: El Rol Crítico de la TC Simple</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p class="p-4 bg-red-900/50 border border-red-500 rounded-md text-2xl text-center"><strong class="text-white">OBJETIVO #1: EXCLUIR HEMORRAGIA</strong></p>
+                        <p><strong class="text-white">Signos tempranos de isquemia:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Pérdida de diferenciación cortico-subcortical.</li>
+                            <li>Signo de la <strong class="text-yellow-300">arteria cerebral media (ACM) hiperdensa</strong> (visualización del trombo).</li>
+                        </ul>
+                        <p><strong class="text-white">Escala ASPECTS:</strong> Herramienta de 10 puntos para evaluar la extensión de los cambios isquémicos en territorio de la ACM. Un puntaje bajo (≤7) se asocia a mayor riesgo de transformación hemorrágica post-trombólisis.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[TC+con+signo+de+la+ACM+hiperdensa]" alt="TC de Cráneo" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Guía de Práctica Clínica CENETEC. (2022). Diagnóstico y Tratamiento del EVC Isquémico Agudo.</div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Neuroimagen Avanzada -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">10. Neuroimagen: Modalidades Avanzadas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                     <div class="text-center p-4 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Angiografía por TC (Angio-TC)</h3>
+                        <img src="https://placehold.co/400x250/1f2937/e2e8f0?text=[Angio-TC+con+oclusión+vascular]" alt="Angio-TC" class="rounded-lg mb-4 mx-auto">
+                        <p class="text-lg text-gray-300">Esencial para confirmar <strong class="text-yellow-300">oclusión de gran vaso (OGV)</strong> y planear la trombectomía mecánica.</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Resonancia Magnética (RM)</h3>
+                        <img src="https://placehold.co/400x250/1f2937/e2e8f0?text=[RM+con+mismatch+DWI/FLAIR]" alt="RM Cerebral" class="rounded-lg mb-4 mx-auto">
+                        <p class="text-lg text-gray-300">La secuencia de <strong class="text-white">difusión (DWI)</strong> es la más sensible. La <strong class="text-yellow-300">discordancia DWI/FLAIR</strong> indica un infarto <4.5-6h, permitiendo trombólisis en ventana extendida o "ictus del despertar".</p>
+                    </div>
+                </div>
+            </div>
+             <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Campbell, B. C. V., et al. (2019). Extending the Time Window for Thrombolysis in Wake-Up Stroke. New England Journal of Medicine, 380(19), 1789-1792.</div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Laboratorios y Soporte -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">11. Laboratorios y Cuidados Iniciales</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                         <div class="p-4 bg-green-900/50 border border-green-500 rounded-md">
+                           <p class="text-white text-xl"><strong class="font-bold">GPC Mexicana 2022:</strong> El <strong class="text-yellow-300">único estudio indispensable</strong> antes de la trombólisis es la <strong class="text-yellow-300">glucosa sérica capilar</strong>.</p>
+                           <p class="mt-2">Otros estudios (ECG, troponinas, tiempos de coagulación) <strong class="text-red-400">NO deben retrasar la TC ni la TIV</strong>.</p>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mt-6">Pilares del "Stroke Unit Care"</h3>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong class="text-white">Oxigenación:</strong> O₂ suplementario solo si SatO₂ <94%.</li>
+                            <li><strong class="text-white">Control glucémico:</strong> Meta 140-180 mg/dL.</li>
+                            <li><strong class="text-white">Control de temperatura:</strong> Tratar fiebre (≥38°C) con antipiréticos.</li>
+                            <li><strong class="text-white">Tamizaje de disfagia:</strong> Realizar antes de dar cualquier cosa por vía oral.</li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Iconos+de+Stroke+Unit+Care]" alt="Stroke Unit Care" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Guía de Práctica Clínica CENETEC. (2022). Diagnóstico y Tratamiento del EVC Isquémico Agudo.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 13: Tratamiento TIV -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">12. Tto. Isquémico: Trombólisis Intravenosa (TIV)</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <h3 class="text-2xl font-semibold text-white">Alteplasa (rt-PA)</h3>
+                        <p><strong class="text-white">Dosis:</strong> <strong class="text-yellow-300">0.9 mg/kg</strong> (máximo 90 mg). 10% en bolo en 1 min, 90% en infusión para 1 hora.</p>
+                        <p><strong class="text-white">Ventana estándar:</strong> <strong class="text-green-300"><4.5 horas</strong> desde el inicio de los síntomas.</p>
+                        <p><strong class="text-white">Ventana extendida:</strong> <strong class="text-green-300">4.5-9 horas</strong> o "ictus del despertar" en pacientes seleccionados con mismatch DWI/FLAIR.</p>
+
+                        <div class="p-4 bg-blue-900/50 border border-blue-500 rounded-md mt-4">
+                           <h3 class="text-2xl font-semibold text-white">Tenecteplasa (TNK) - GPC Mex 2022</h3>
+                           <p class="text-white mt-2">Alternativa a Alteplasa. Ventaja logística: <strong class="text-yellow-300">BOLO ÚNICO</strong> (0.25 mg/kg si va a TM; 0.4 mg/kg en ictus menores).</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Vial+de+Alteplasa+y+Tenecteplasa]" alt="Trombolíticos" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+             <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Campbell, B. C., et al. (2022). Tenecteplase versus Alteplase before Thrombectomy for Ischemic Stroke. New England Journal of Medicine, 386(21), 2009-2018.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 14: Criterios TIV -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-center text-red-300">13. TIV: Criterios Clave de Exclusión</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-red-900/30 p-4 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-3 text-red-300">Exclusiones Absolutas (<4.5h)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                           <li>Hemorragia en TC.</li>
+                           <li>Historia de Hemorragia Intracraneal (HIC) previa.</li>
+                           <li>EVC o Trauma Craneoencefálico (TCE) severo en los últimos 3 meses.</li>
+                           <li>Sangrado activo o coagulopatía (INR >1.7, plaquetas <100,000).</li>
+                           <li>TA persistentemente >185/110 mmHg.</li>
+                           <li>Hipoglucemia <50 mg/dL.</li>
+                           <li>TC con infarto extenso (>1/3 del territorio de la ACM o ASPECTS ≤7).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-900/30 p-4 rounded-lg">
+                         <h3 class="text-2xl font-semibold mb-3 text-yellow-300">Exclusiones Adicionales (Ventana 3-4.5h)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                           <li>Edad >80 años.</li>
+                           <li>Uso de anticoagulantes orales (independientemente del INR).</li>
+                           <li>NIHSS >25 (infarto muy severo).</li>
+                           <li>Historia de Diabetes + EVC previo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+             <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Powers, W. J., et al. (2019). Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update. Stroke, 50(12).</div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Trombectomía Mecánica -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">14. Tto. Isquémico: Trombectomía Mecánica (TM)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p><strong class="text-white">Indicación:</strong> Pacientes con EVC isquémico por <strong class="text-yellow-300">Oclusión de Gran Vaso (OGV)</strong> en circulación anterior (ACI o M1 de la ACM).</p>
+                        <h3 class="text-xl font-semibold text-white">Ventanas Terapéuticas:</h3>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong class="text-green-300">Ventana temprana (<6 horas):</strong> En pacientes con buen estado funcional previo (mRS 0-1) y NIHSS ≥6.</li>
+                            <li><strong class="text-green-300">Ventana extendida (6-24 horas):</strong> Pacientes seleccionados que cumplen criterios de imagen avanzada (DAWN/DEFUSE 3) que demuestran tejido salvable (penumbra).</li>
+                        </ul>
+                        <p><strong class="text-white">Terapia Puente ("Bridging"):</strong> Si un paciente es candidato a ambos, se debe administrar <strong class="text-yellow-300">TIV lo antes posible sin retrasar la TM</strong>.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Animación+de+Stent+Retriever]" alt="Trombectomía Mecánica" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Goyal, M., et al. (2016). Penumbral imaging and functional outcome in patients with acute ischemic stroke treated with endovascular therapy (HERMES): a meta-analysis of individual patient data. The Lancet Neurology, 15(6), 559-568.</div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Control de HTA en Isquémico -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-8 text-center text-blue-300">15. Control de HTA en EVC Isquémico Agudo</h2>
+                <div class="flex flex-col md:flex-row justify-around items-stretch">
+                    <div class="w-full md:w-2/5 p-6 bg-green-900/30 rounded-lg text-center mb-4 md:mb-0">
+                        <h3 class="text-2xl font-semibold mb-4 text-green-300">Candidatos a Reperfusión (TIV/TM)</h3>
+                        <p class="text-lg text-gray-300">Es <strong class="text-white">IMPERATIVO</strong> bajar la PA para reducir el riesgo de sangrado.</p>
+                        <p class="text-3xl font-bold my-4 text-yellow-300">< 185/110 mmHg</p>
+                        <p class="text-lg font-semibold text-white">ANTES de iniciar TIV.</p>
+                        <p class="text-3xl font-bold my-4 text-yellow-300">< 180/105 mmHg</p>
+                        <p class="text-lg font-semibold text-white">DURANTE y por 24h POST-TIV.</p>
+                    </div>
+                    <div class="w-full md:w-2/5 p-6 bg-yellow-900/30 rounded-lg text-center">
+                        <h3 class="text-2xl font-semibold mb-4 text-yellow-300">NO Candidatos a Reperfusión</h3>
+                         <p class="text-lg text-gray-300">Se permite una <strong class="text-white">"Hipertensión Permisiva"</strong> para mantener la perfusión en la penumbra.</p>
+                         <p class="text-lg text-gray-300 mt-4">Tratar SÓLO si la PA es:</p>
+                         <p class="text-3xl font-bold my-4 text-red-400">> 220/120 mmHg</p>
+                         <p class="text-lg font-semibold text-white">Objetivo: Reducción cautelosa del 15% en 24h.</p>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-xl">Fármacos de elección: <strong class="text-white">Labetalol</strong> o <strong class="text-white">Nicardipino</strong> IV (vida media corta, titulables).</p>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Guía de Práctica Clínica CENETEC. (2022). Diagnóstico y Tratamiento del EVC Isquémico Agudo.</div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Manejo EVC Hemorrágico -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-red-300">16. Manejo EVC Hemorrágico (Basado en Guías AHA/ASA y ESO)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p>Dado que no hay GPC mexicana actualizada, el manejo se basa en guías internacionales, enfocado en un <strong class="text-white">"paquete de cuidados agudos"</strong>.</p>
+                        <h3 class="text-2xl font-semibold text-white mt-4">Pilar 1: Control Intensivo de la Presión Arterial</h3>
+                        <p>Para pacientes con PAS entre 150-220 mmHg, se recomienda un descenso agudo a un objetivo de:</p>
+                        <p class="text-4xl font-bold text-center text-yellow-300">PAS 140 mmHg</p>
+                        <p>Este objetivo reduce el riesgo de expansión del hematoma sin comprometer la perfusión cerebral.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[TC+de+cráneo+con+hemorragia]" alt="EVC Hemorrágico" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Hemphill, J. C., et al. (2022). Guidelines for the Management of Spontaneous Intracerebral Hemorrhage. Stroke, 53(7).</div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Reversión Anticoagulación -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-red-300">17. Pilar 2: Reversión Urgente de la Anticoagulación</h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-between">
+                        <p class="text-xl font-semibold">Warfarina / Acenocumarina</p>
+                        <p class="text-xl font-bold text-yellow-300">CCP de 4 Factores + Vitamina K IV</p>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-between">
+                        <p class="text-xl font-semibold">Dabigatrán</p>
+                        <p class="text-xl font-bold text-yellow-300">Idarucizumab (Antídoto)</p>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-between">
+                        <p class="text-xl font-semibold">Inhibidores del Factor Xa (Apixabán, Rivaroxabán)</p>
+                        <p class="text-xl font-bold text-yellow-300">Andexanet alfa (Antídoto) / CCP4F</p>
+                    </div>
+                    <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-between">
+                        <p class="text-xl font-semibold">Heparina No Fraccionada</p>
+                        <p class="text-xl font-bold text-yellow-300">Sulfato de Protamina</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-center text-xl text-gray-300">La reversión <strong class="text-white">inmediata y específica</strong> es crucial para limitar la expansión del hematoma y mejorar el pronóstico.</p>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Steiner, T., et al. (2019). European Stroke Organisation (ESO) guidelines on reversal of oral anticoagulants in acute intracerebral haemorrhage. Journal of Neurology, 266(6), 1545-1552.</div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Cirugía en Hemorrágico -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-red-300">18. Pilar 3: Intervención Quirúrgica</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Hemorragia Supratentorial</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>La craneotomía convencional <strong class="text-red-400">no se recomienda de rutina</strong> para hematomas profundos.</li>
+                            <li>La <strong class="text-green-300">Cirugía de Mínima Invasión (CMI)</strong> con aspiración estereotáctica o endoscópica es una opción prometedora para reducir la mortalidad y mejorar el resultado funcional.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Hemorragia Infratentorial (Cerebelosa)</h3>
+                        <p class="p-4 bg-red-900/50 border border-red-500 rounded-md text-xl text-center"><strong class="text-white">¡EMERGENCIA NEUROQUIRÚRGICA!</strong></p>
+                        <p class="text-gray-300 mt-2">La evacuación está indicada si el hematoma es >15 mL y hay deterioro neurológico o compresión del tallo cerebral.</p>
+                    </div>
+                </div>
+                 <div class="mt-8">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Hemorragia Intraventricular</h3>
+                    <p class="text-lg text-gray-300">Si causa hidrocefalia aguda, se recomienda un <strong class="text-yellow-300">Drenaje Ventricular Externo (DVE)</strong>. Se puede considerar la administración de alteplasa a través del DVE para acelerar la lisis del coágulo.</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Mendelow, A. D., et al. (2013). Early surgery versus initial conservative treatment in patients with spontaneous supratentorial lobar intracerebral haematomas (STICH II): a randomised trial. The Lancet, 382(9890), 397-408.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 20: Prevención Secundaria -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-center text-blue-300">19. Prevención Secundaria: Pilares del Manejo a Largo Plazo</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">HTA</h3>
+                        <p class="text-2xl font-bold text-yellow-300">< 130/80 mmHg</p>
+                        <p class="text-gray-400">Es el factor más importante a controlar.</p>
+                    </div>
+                     <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Dislipidemia</h3>
+                        <p class="text-2xl font-bold text-yellow-300">LDL-C < 70 mg/dL</p>
+                        <p class="text-gray-400">Uso de estatinas de alta intensidad.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Diabetes</h3>
+                        <p class="text-2xl font-bold text-yellow-300">HbA1c < 7%</p>
+                        <p class="text-gray-400">Priorizar arGLP-1 o iSGLT2 por beneficio CV.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Fibrilación Auricular</h3>
+                        <p class="text-lg font-bold text-yellow-300">Preferir ACODs sobre Warfarina</p>
+                        <p class="text-gray-400">Reducen HIC en ~50%.</p>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-2xl text-gray-300">Un control agresivo y multifactorial puede reducir el riesgo de recurrencia hasta en un <strong class="text-green-400">80%</strong>.</p>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Kernan, W. N., et al. (2021). Guidelines for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack. Stroke, 52(7).</div>
+            </div>
+        </div>
+        
+        <!-- Slide 21: Antiplaquetarios -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-8 text-center text-blue-300">20. Prevención Secundaria: Terapia Antiplaquetaria (No Cardioembólico)</h2>
+                 <div class="flex flex-col md:flex-row justify-around items-stretch">
+                    <div class="w-full md:w-2/5 p-6 bg-blue-900/30 rounded-lg text-center mb-4 md:mb-0">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-300">Terapia a Largo Plazo</h3>
+                        <p class="text-xl font-bold text-white mb-4">MONOTERAPIA</p>
+                        <div class="text-lg space-y-2 text-gray-300">
+                           <p>Aspirina (50-325 mg/día)</p>
+                           <p>O</p>
+                           <p>Clopidogrel (75 mg/día)</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/5 p-6 bg-green-900/30 rounded-lg text-center">
+                        <h3 class="text-2xl font-semibold mb-4 text-green-300">Terapia a Corto Plazo</h3>
+                        <p class="text-xl font-bold text-white mb-4">TERAPIA DUAL (TAPD)</p>
+                        <p class="text-lg text-gray-300"><strong class="text-white">Aspirina + Clopidogrel</strong> por <strong class="text-yellow-300">21 DÍAS</strong>.</p>
+                        <p class="text-lg text-gray-300 mt-4">Indicado SÓLO en:</p>
+                        <ul class="list-disc list-inside text-left ml-4 mt-2">
+                            <li>EVC isquémico menor (NIHSS ≤3)</li>
+                            <li>AIT de alto riesgo (ABCD² ≥4)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Johnston, S. C., et al. (2018). Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA. New England Journal of Medicine, 379(3), 215-225.</div>
+            </div>
+        </div>
+
+        <!-- Slide 22: Qué NO hacer -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-center text-red-300">21. Prácticas a Evitar: "Cosas que NO se deben hacer"</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-bold text-white mb-2">En EVC Isquémico Agudo:</h3>
+                        <ul class="list-none space-y-2">
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No retrasar la TC por esperar laboratorios (excepto glucosa).</li>
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No administrar O₂ si SatO₂ >94%.</li>
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No bajar la PA agresivamente si no es candidato a reperfusión.</li>
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No iniciar antiplaquetarios/anticoagulantes en las primeras 24h post-TIV sin TC de control.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-bold text-white mb-2">En EVC Hemorrágico y Prevención:</h3>
+                         <ul class="list-none space-y-2">
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No usar corticoides para el edema cerebral en HIP.</li>
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No mantener la terapia antiplaquetaria dual (TAPD) a largo plazo.</li>
+                           <li class="flex items-start"><span class="text-red-500 mr-2 text-2xl">✗</span> No combinar antiplaquetarios con anticoagulantes sin una indicación cardiológica clara y sopesando el alto riesgo de sangrado.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Múltiples guías (AHA/ASA, ESO, GPC CENETEC).</div>
+            </div>
+        </div>
+        
+        <!-- Slide 23: Recursos Limitados -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-center text-blue-300">22. Adaptación del Manejo en Entornos con Recursos Limitados</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center">
+                        <img src="https://placehold.co/80x80/1f2937/93c5fd?text=TC" alt="TC" class="rounded-full mb-2">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">TC Simple</h3>
+                        <p class="text-gray-400">Sigue siendo la herramienta fundamental para diferenciar isquemia de hemorragia.</p>
+                    </div>
+                     <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center">
+                        <img src="https://placehold.co/80x80/1f2937/93c5fd?text=TNK" alt="TNK" class="rounded-full mb-2">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Tenecteplasa</h3>
+                        <p class="text-gray-400">Su administración en bolo único simplifica el protocolo y no requiere bomba de infusión.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center">
+                        <img src="https://placehold.co/80x80/1f2937/93c5fd?text=UNIDAD" alt="Unidad EVC" class="rounded-full mb-2">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Unidades de EVC</h3>
+                        <p class="text-gray-400">Incluso un área designada con personal capacitado y protocolos estandarizados mejora los resultados.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center">
+                        <img src="https://placehold.co/80x80/1f2937/93c5fd?text=TELE" alt="Telestroke" class="rounded-full mb-2">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Telestroke</h3>
+                        <p class="text-gray-400">Permite que un neurólogo a distancia evalúe y guíe el tratamiento, expandiendo el acceso a la atención.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">WHO. (2020). Package of Essential Noncommunicable (PEN) disease interventions for primary health care.</div>
+            </div>
+        </div>
+        
+        <!-- Slide 24: Conclusiones -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold mb-6 text-blue-300">23. Conclusiones y Direcciones Futuras</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-lg space-y-4 text-gray-300">
+                        <p>El manejo del EVC ha transitado de un enfoque de soporte a una era de <strong class="text-white">intervención activa y tiempo-dependiente</strong>.</p>
+                        <p>La <strong class="text-green-300">GPC Mexicana 2022 para EVC Isquémico está alineada</strong> con la evidencia internacional más reciente, incluyendo ventanas extendidas y uso de Tenecteplasa.</p>
+                        <div class="p-4 bg-red-900/50 border border-red-500 rounded-md">
+                           <p class="text-white text-xl"><strong class="font-bold">Brecha Crítica:</strong> Es urgente desarrollar una <strong class="text-yellow-300">guía nacional actualizada para el manejo del EVC hemorrágico</strong> para estandarizar la atención de esta patología de alta mortalidad.</p>
+                        </div>
+                        <p>La mejora de resultados dependerá de la implementación rigurosa y equitativa de los <strong class="text-white">sistemas de atención ("Código Cerebro")</strong> en todos los niveles.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/500x350/1f2937/e2e8f0?text=[Diagrama+de+Red+de+Atención+EVC]" alt="Red de Atención" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Dr. Brandon Arguelles - ISSSTE - 17/09/2025</div>
+                <div class="bibliography">Resumen del contenido presentado.</div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Preguntas -->
+        <div class="slide bg-gradient-to-br from-blue-900 via-gray-900 to-slate-900">
+            <div class="slide-content text-center">
+                <h1 class="text-6xl font-bold mb-8 text-blue-300">Preguntas</h1>
+                 <p class="text-4xl font-light text-gray-300 mb-12">¡Gracias por su atención!</p>
+                <div class="text-xl text-gray-400">
+                    <p>Dr. Brandon Arguelles</p>
+                    <p class="text-lg">Médico Pasante del Servicio Social</p>
+                    <p class="text-lg">ISSSTE</p>
+                </div>
+            </div>
+             <div class="footer">
+                <div class="text-sm">ISSSTE</div>
+                <div class="text-sm">17 de Septiembre del 2025</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Botones de Navegación -->
+    <button id="prevBtn" class="nav-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    <button id="nextBtn" class="nav-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            // Ocultar botones en la primera y última diapositiva
+            prevBtn.style.display = index === 0 ? 'none' : 'flex';
+            nextBtn.style.display = index === slides.length - 1 ? 'none' : 'flex';
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Inicializar la primera diapositiva
+        showSlide(currentSlide);
+    </script>
+
+</body>
+</html>
